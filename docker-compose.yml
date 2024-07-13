@@ -1,0 +1,41 @@
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: portfolio_frontend
+    working_dir: /app/frontend
+    volumes:
+      - ./frontend:/app/frontend
+    ports:
+      - "5172:5172"
+
+  article:
+    build:
+      context: ./getOtherServicesData/getArticle
+      dockerfile: Dockerfile
+    container_name: portfolio_article
+    working_dir: /app/getArticle
+    volumes:
+      - ./getOtherServicesData/getArticle:/app/getArticle
+    ports:
+      - "8002:8000"
+
+  photo:
+    build:
+      context: ./getOtherServicesData/getPhoto
+      dockerfile: Dockerfile
+    container_name: portfolio_photo
+    working_dir: /app/getPhoto
+    volumes:
+      - ./getOtherServicesData/getPhoto:/app/getPhoto
+    ports:
+      - "8001:8000"
+
+networks:
+  sail:
+    driver: bridge
+
+volumes:
+  sailmysql:
+    driver: local
