@@ -4,33 +4,33 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     container_name: portfolio_frontend
-    working_dir: /app/frontend
+    working_dir: /app
     volumes:
-      - ./frontend:/app/frontend
+      - ./frontend:/app
     ports:
       - "5172:5172"
 
   article:
     build:
-      context: ./getOtherServicesData/getArticle
-      dockerfile: Dockerfile
+      context: ./getOtherServicesData
+      dockerfile: getArticle/Dockerfile
     container_name: portfolio_article
-    working_dir: /app/getArticle
+    working_dir: /app/getOtherServicesData/getArticle
     volumes:
-      - ./getOtherServicesData/getArticle:/app/getArticle
+      - ./getOtherServicesData/getArticle:/app/getOtherServicesData/getArticle
     ports:
-      - "8002:8000"
+      - "8001:8000"
 
   photo:
     build:
-      context: ./getOtherServicesData/getPhoto
-      dockerfile: Dockerfile
+      context: ./getOtherServicesData
+      dockerfile: getPhoto/Dockerfile
     container_name: portfolio_photo
-    working_dir: /app/getPhoto
+    working_dir: /app/getOtherServicesData/getPhoto
     volumes:
-      - ./getOtherServicesData/getPhoto:/app/getPhoto
+      - ./getOtherServicesData/getPhoto:/app/getOtherServicesData/getPhoto
     ports:
-      - "8001:8000"
+      - "8002:8000"
 
 networks:
   sail:
