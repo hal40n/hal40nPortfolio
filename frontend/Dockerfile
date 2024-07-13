@@ -3,7 +3,7 @@ FROM node:20.5.1-alpine
 RUN apk add --no-cache git bash
 
 WORKDIR /app/frontend
-COPY portfolio_frontend/ ./
+COPY  . .
 
 RUN apk update
 
