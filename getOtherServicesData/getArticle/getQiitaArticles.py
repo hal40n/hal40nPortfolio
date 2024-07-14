@@ -1,6 +1,9 @@
 from fastapi import HTTPException
 import os
 import requests
+from dotenv import load_dotenv
+
+load_dotenv()
 
 def get_qiita_token():
     qiita_access_token = os.getenv('QIITA_ACCESS_TOKEN')

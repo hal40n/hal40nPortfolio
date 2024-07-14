@@ -1,8 +1,11 @@
 import os
+from dotenv import load_dotenv
 import requests
 from requests.auth import HTTPBasicAuth
 from fastapi import HTTPException
 import xmltodict
+
+load_dotenv()
 
 def generate_url(level, id):
     base_url = "https://blog.hatena.ne.jp"

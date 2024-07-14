@@ -10,27 +10,17 @@ services:
     ports:
       - "5172:5172"
 
-  article:
+  other:
     build:
       context: ./getOtherServicesData
-      dockerfile: getArticle/Dockerfile
-    container_name: portfolio_article
-    working_dir: /app/getOtherServicesData/getArticle
+      dockerfile: Dockerfile
+    container_name: portfolio_other
+    working_dir: /app
     volumes:
-      - ./getOtherServicesData/getArticle:/app/getOtherServicesData/getArticle
+      - ./getOtherServicesData:/app
     ports:
-      - "8001:8000"
-
-  photo:
-    build:
-      context: ./getOtherServicesData
-      dockerfile: getPhoto/Dockerfile
-    container_name: portfolio_photo
-    working_dir: /app/getOtherServicesData/getPhoto
-    volumes:
-      - ./getOtherServicesData/getPhoto:/app/getOtherServicesData/getPhoto
-    ports:
-      - "8002:8000"
+      - "8001:8001"
+      - "8002:8002"
 
 networks:
   sail:

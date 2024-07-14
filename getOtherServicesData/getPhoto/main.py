@@ -1,8 +1,14 @@
-from fastapi import FastAPI
-from requests.auth import HTTPBasicAuth
+import sys
 import os
-import json
-from getPhotos import *
+from dotenv import load_dotenv
+
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
+from fastapi import FastAPI, HTTPException
+from fastapi.responses import JSONResponse
+from getPhotos import get_photos
+
+load_dotenv()
 
 app = FastAPI()
 
@@ -10,9 +16,17 @@ app = FastAPI()
 def show_photos():
     instagram_business_account_id = os.getenv('INSTAGRAM_BUSINESS_ACCOUNT_ID')
     instagram_access_token = os.getenv('INSTAGRAM_ACCESS_TOKEN')
-    photos = get_photos(instagram_business_account_id, instagram_access_token)
-    return json.dump(photos, indent=4)
+
+    if not instagram_business_account_id or not instagram_access_token:
+        raise HTTPException(status_code=400, detail="Missing Instagram credentials")
+
+    try:
+        photos = get_photos(instagram_business_account_id, instagram_access_token)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+    return JSONResponse(content=photos)
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8001)
+    uvicorn.run(app, host="0.0.0.0", port=8002)

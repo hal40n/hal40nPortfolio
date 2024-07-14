@@ -1,7 +1,10 @@
 import os
 import requests
+from dotenv import load_dotenv
 import json
 from fastapi import HTTPException
+
+load_dotenv()
 
 bearer_token = os.getenv('BEARER_TOKEN')
 url = "https://api.twitter.com/2/tweets/search/recent"

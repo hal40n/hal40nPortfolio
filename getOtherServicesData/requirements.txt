@@ -4,3 +4,4 @@ requests
 xmltodict
 pytest
 httpx
+python-dotenv

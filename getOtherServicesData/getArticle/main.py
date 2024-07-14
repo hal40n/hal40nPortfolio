@@ -1,11 +1,16 @@
-from fastapi import FastAPI
-from requests.auth import HTTPBasicAuth
+import sys
 import os
+from dotenv import load_dotenv
+
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
+from fastapi import FastAPI
 import json
 from getQiitaArticles import *
 from getHatenaArticles import *
 from getXTweets import *
 
+load_dotenv()
 
 app = FastAPI()
 
@@ -14,7 +19,6 @@ def show_articles():
     hatena_id = os.getenv('HATENA_ID')
     hatena_api_key = os.getenv('HATENA_API_KEY')
 
-    articles = {}
     hatena_articles = get_hatena_articles(hatena_id, hatena_api_key)
     qiita_articles = get_qiita_articles()
     x_tweets = get_x_tweets()
